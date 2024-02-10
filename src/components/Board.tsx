@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useLocalStorage } from "@uidotdev/usehooks";
 import DEFAULT_CARDS from "../assets/data";
 import Column from "./Column";
 import DeleteCard from "./DeleteCard";
@@ -10,10 +10,10 @@ export type ICard = {
 };
 
 const Board = () => {
-  const [cards, setCards] = useState<ICard[]>(DEFAULT_CARDS);
+  const [cards, setCards] = useLocalStorage<ICard[]>("cards", DEFAULT_CARDS);
 
   return (
-    <div className="flex h-full w-full gap-3 overflow-scroll p-12">
+    <div className="flex gap-3 p-12">
       <Column
         title="Backlog"
         column="backlog"
@@ -42,6 +42,14 @@ const Board = () => {
         cards={cards}
         setCards={setCards}
       />
+      <Column
+        title="Complete"
+        column="done"
+        headingColor="text-emerald-200"
+        cards={cards}
+        setCards={setCards}
+      />
+
       <DeleteCard setCards={setCards} />
     </div>
   );
