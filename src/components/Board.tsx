@@ -42,14 +42,6 @@ const Board = () => {
         cards={cards}
         setCards={setCards}
       />
-      <Column
-        title="Complete"
-        column="done"
-        headingColor="text-emerald-200"
-        cards={cards}
-        setCards={setCards}
-      />
-
       <DeleteCard setCards={setCards} />
     </div>
   );
