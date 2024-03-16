@@ -23,8 +23,8 @@ const Column: FC<ColumnProps> = ({
   const [active, setActive] = useState(false);
 
   const handleDragStart = useCallback(
-    (e: React.DragEvent<HTMLDivElement>, card: ICard) => {
-      e.dataTransfer.setData("cardId", card.id);
+    (e: React.DragEvent<HTMLDivElement>, id: string) => {
+      e.dataTransfer.setData("cardId", id);
     },
     []
   );
@@ -143,7 +143,10 @@ const Column: FC<ColumnProps> = ({
         })}
       >
         {filteredCards.map((card) => (
-          <Card key={card.id} {...card} startDrag={handleDragStart} />
+          <>
+            <DropIndicator beforeId={card.id} column={column} />
+            <Card key={card.id} {...card} startDrag={handleDragStart} />
+          </>
         ))}
         <DropIndicator column={column} />
         <AddCard column={column} setCards={setCards} />
